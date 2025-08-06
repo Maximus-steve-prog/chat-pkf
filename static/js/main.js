@@ -550,7 +550,7 @@ $(function(){
                       </div>
                     </div>
                     <div class="flex items-end">
-                      <div class="bg-blue-500 text-white px-3 py-1 rounded-lg max-w-3xs md:max-w-xs shadow-md relative" id="${messageId}">
+                      <div class="bg-blue-600 text-white px-3 py-1 rounded-lg max-w-3xs md:max-w-xs shadow-md relative" id="${messageId}">
                         ${innerHtml}
                         <div class="flex justify-between gap-2 items-center mt-1">
                           <span class="text-xs text-gray-300">${time}</span>
