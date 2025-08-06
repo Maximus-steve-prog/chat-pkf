@@ -295,6 +295,7 @@ $(function(){
     $('.openChat').removeClass('hidden').show();
     localStorage.setItem('chat','Desactive')
     $('#circleProgress').removeClass('z-0').addClass('z-50');
+    window.location.reload(); // Reload the page to reset state
   });
 
   // Open login popup
