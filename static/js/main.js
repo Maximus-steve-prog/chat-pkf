@@ -1304,7 +1304,7 @@ $(function(){
               login: "Login",
               register: "Register",
               upload: "Publish a book",
-              title: "SCIS-GROUP LIBRARY",
+              title: "Online chat platform",
               welcome: "Welcome on PKF chat online Application",
               description: "PKF chat is a platform that allows you to find the best friends for your projects. You can chat with other users and share your books."
             }
@@ -1317,7 +1317,7 @@ $(function(){
               login: "Se connecter",
               register: "Inscription",
               upload: "Publier un livre",
-              title: "BIBLIO-SCIS-GROUP",
+              title: "plateforme de chat en ligne",
               welcome: "Bienvenue sur PKF chat en ligne",
               description: "PKF chat est une plateforme qui vous permet de trouver les meilleurs collègues pour vos projets. Vous pouvez discuter avec d'autres utilisateurs et partager vos livres."  
             }
