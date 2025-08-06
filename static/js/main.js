@@ -1305,8 +1305,8 @@ $(function(){
               register: "Register",
               upload: "Publish a book",
               title: "SCIS-GROUP LIBRARY",
-              welcome: "Welcome on SCIS-GROUP online Library",
-              description: "SCIS-GROUP LIBRARY is a platform that allows you to find the best books for your projects. You can chat with other users and share your books."
+              welcome: "Welcome on PKF chat online Application",
+              description: "PKF chat is a platform that allows you to find the best friends for your projects. You can chat with other users and share your books."
             }
           },
           fr: {
@@ -1318,8 +1318,8 @@ $(function(){
               register: "Inscription",
               upload: "Publier un livre",
               title: "BIBLIO-SCIS-GROUP",
-              welcome: "Bienvenue sur SCIS-GROUP bibliotheque en ligne",
-              description: "SCIS-GROUP LIBRARY est une plateforme qui vous permet de trouver les meilleurs livres pour vos projets. Vous pouvez discuter avec d'autres utilisateurs et partager vos livres."  
+              welcome: "Bienvenue sur PKF chat en ligne",
+              description: "PKF chat est une plateforme qui vous permet de trouver les meilleurs collègues pour vos projets. Vous pouvez discuter avec d'autres utilisateurs et partager vos livres."  
             }
           }
     }
