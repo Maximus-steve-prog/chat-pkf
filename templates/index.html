@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="{{url_for('static', filename='lib/all.min.js')}}" ></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='lib/swiper-bundle.min.css')}}" />
+    <!-- WaveSurfer.js -->
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+
+    <!-- RecordPlugin -->
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugins/record.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="{{url_for('static', filename='lib/tailwindcss.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js" ></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='lib/jquery-ui.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/style.css')}}">
+    <link rel="icon" href="{{url_for('static', filename='images/logo_scis_.png')}}" type="image/x-icon">
+   
+    <script>
+    tailwind.config = {
+        darkMode: 'class'
+    };
+    </script>
+    <title>SCIS-GROUP-APP</title>
+</head>
+<body class="bg-gray-100 dark:text-white  h-screen w-full bg-fixed  md:bg-[url('{{url_for('static', filename='images/Particulier-.png')}}')]  bg-[url('{{url_for('static', filename='images/Particulier-sm.png')}}')] bg-no-repeat md:bg-top bg-left-top">
+<!-- Message template -->
+  <div id="message" class="message-displayer items-center flex gap-2 rounded py-2  px-3 min-w-[300px] fixed left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-md border bg-white" style="top: -10%;  z-index:9999;">
+      <img id="messageIcon" src="" class="w-7 h-7" alt="">
+      <div id="messageContent" class="content w-full h-full flex  mr-3  text-gray-500 justify-center items-center">
+          <!-- Placeholder for message -->
+      </div>
+      <i id="closeMsg" class="fa fa-times absolute shadow-md p-0.5 w-4 h-4 text-sm text-gray-400 -top-1.5 border rounded-full bg-white flex items-center justify-center -right-1.5 cursor-pointer"></i>
+  </div>
+    
+
+  <div class="header dark:shadow-md z-50 fixed border-b-1 border-gray-200 w-full h-16 flex justify-between px-40 items-center bg-white dark:bg-gray-700 shadow-md">
+    <a href="#animated-section">
+      <div class="left logo flex p-2 gap-2 items-center cursor-pointer">
+          <img src="{{url_for('static', filename='images/logo_scis_.png')}}" alt="Logo" class="h-9 w-8">
+          <h1 data-i18n="title" class="sm:text-2lg uppercase text-lg font-bold title-font  text-indigo-500 dark:text-indigo-400"></h1>
+      </div>
+    </a>
+    <nav class="flex dark:text-white text-gray-600 dark:bg-gray-700 h-full items-center gap-10 z-50">
+      <div class="nav-item relative h-full flex items-center justify-start  ">
+        <a href="#animated-section" data-i18n="home" class="duration-300  text-gray-600  dark:text-white "></a>
+                   
+      </div>
+      
+      <div class="nav-item relative flex items-center justify-start">
+          <a data-i18n="books" href="#books" class="duration-300  text-gray-600  dark:text-white "></a>
+      </div>
+      <div class="nav-item relative h-full flex items-center justify-start">
+          <a data-i18n="team" href="#team" class="duration-300  text-gray-600  dark:text-white "></a>
+        
+      </div>
+      <div class="nav-item relative h-full flex items-center justify-start">
+          <a data-i18n="upload" href="#upload-book" class="duration-300  text-gray-600  dark:text-white "></a>
+        
+      </div>
+     
+    </nav>
+    <!-- Your language selection icons -->
+    <div class="lang-switcher md:ml-2 hidden md:flex lang flex gap-5 items-center">        
+          <img src="{{url_for('static', filename='images/en.jpeg')}}" class="rounded-full w-7 h-7 cursor-pointer" data-i18n-lang="en"  title="English">
+          <img src="{{url_for('static', filename='images/fr.jpeg')}}" class="rounded-full w-7 h-7 cursor-pointer" data-i18n-lang="fr"  title="French">
+    </div>
+    <div class="right flex gap-4 p-2">
+      <button type="button" class="btn-dark   hs-dark-mode font-medium text-gray-800 rounded-full hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" data-hs-theme-click-value="dark">
+        <span class="group inline-flex shrink-0 justify-center items-center size-9">
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </span>
+      </button>
+      <button type="button" class="btn-light  hidden hs-dark-mode font-medium text-gray-800 rounded-full hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" data-hs-theme-click-value="light">
+          <span class="group inline-flex shrink-0 justify-center items-center size-9">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </span>
+      </button>
+        <button type="button" id="chatBtn" class="bg-indigo-500 relative text-white dark:text-gray-300 px-3 py-1.5 rounded hover:bg-indigo-600 cursor-pointer">
+            <i class="fa-solid fa-comment-dots pulse"></i>
+            <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-gray-900"></span>
+        </button>   
+      <button data-i18n="login" class="loginBtn hover:bg-indigo-700 hover:text-gray-200 duration-300  text-gray-100  dark:text-white  py-1 px-5 rounded-md bg-indigo-500">Login</button>
+      <!-- <button data-i18n="register"  class="registerBtn hover:bg-indigo-700 hover:text-gray-200 duration-300  text-gray-100  dark:text-white py-1 px-5 rounded-md bg-indigo-500">Register</button> -->
+    </div>
+
+    <div class="toggle_menu md:hidden cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800  dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </div>
+  </div>
+
+  <section id="animated-section" class="text-gray-600 min-h-screen pt-10 dark:text-white flex body-font opacity-0" >
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center  md:dark:bg-transparent">
+          <!-- Left Content -->
+          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            
+        
+            <h1 data-i18n="welcome" class="sm:text-5xl uppercase text-4xl font-bold title-font mb-4 text-indigo-500 dark:text-indigo-400 opacity-0" id="title">
+              <br class="hidden lg:inline-block">
+            </h1>
+            <p data-i18n="description" class="mb-8 sm:text-shadow-lg leading-relaxed text-black dark:text-gray-100 md:text-gray-900 md:dark:text-gray-800 opacity-0" id="paragraph">
+                            
+            </p>
+<!--             <div class="flex justify-center hidden opacity-0" id="buttons1">
+              <button class="loginBtn inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Login</button>
+              <button class="registerBtn ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Register</button>
+            </div> -->
+            <div class="loginBtn flex justify-center opacity-0" id="buttons2">
+              <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Get Started</button>
+            </div>
+          </div>
+          <!-- Right Image -->
+          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 opacity-0" id="imageContainer">
+            <img class="object-cover object-center rounded md:opacity-50 " alt="hero" src="{{url_for('static', filename='images/Particulier-.png') }}" id="heroImage" />
+          </div>
+        </div>
+  </section>
+
+  <section id="books" class="text-gray-600 bg-gray-100 body-font dark:bg-gray-800">
+      <div class="container px-5 py-10 md:py-20 mx-auto">
+        <div class="flex flex-col text-center w-full md:mb-15">
+            <h1 class="sm:text-3xl uppercase text-2xl font-bold title-font mb-4 text-indigo-500 dark:text-indigo-400">Our Books</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base dark:text-gray-300">Find the best and specific books by searching here 
+                <br class="hidden lg:inline-block"> Enjoy reading
+            </p>
+        </div>
+
+        <div class="search-book p-4 w-full flex text-center items-center justify-center gap-2">
+            <input type="search" placeholder="Search" class="w-full dark:bg-gray-800 dark:text-white md:w-1/2 lg:w-1/3 md:mr-2 sm:w-1/2 px-3 py-2 border rounded"> 
+        </div>
+            <!-- Swiper container -->
+        <div class="swiper mySwiper">
+                <div id="books_loader" class="swiper-wrapper py-5 gap-2">
+        
+                    <!-- All books will be loaded here -->
+                    
+          
+                </div>
+        
+            
+                <div class="swiper-pagination mb-4"></div>
+        </div>
+      </div>
+  </section>
+
+  <section id="team" class="text-gray-600 bg-gray-100 dark:bg-gray-800 body-font dark:text-white min-h-screen"> 
+    <div class="container px-5 py-24 w-full mx-auto">
+          <div class="flex flex-col text-center w-full md:mb-20">
+            <h1 class="sm:text-3xl uppercase text-2xl font-bold title-font mb-4 text-indigo-500 dark:text-indigo-400">Our Team</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base dark:text-gray-300">Find out more about our team members and their roles.</p>
+          </div>
+          <!-- Search Input -->
+          <div class="w-full p-8  px-1 mt-5 mb-4 w-full flex text-center items-center justify-center">
+            <input type="text" id="searchInput" placeholder="Search team members..." class="md:w-1/2 dark:bg-gray-800 dark:text-white lg:w-1/3  sm:w-1/2 w-full px-4 py-2 border border-gray-300 bg-white dark:bg-gray-700 dark:border-gray-600  rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white " />
+        </div>
+         <div class="swiper py-10" id="employees-swiper" dir="rtl">
+                <div class="swiper-wrapper" id="employees">
+                  <!-- .swiper-slide elements injected here -->
+                </div>
+                <div class="swiper-pagination mb-4"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+          </div>
+
+    </div>
+  </section>
+
+  <section id="upload-book" class="text-gray-600 bg-gray-100 dark:bg-gray-800 body-font dark:text-white min-h-screen">
+    <div class="container mx-auto px-4 py-2">
+      <div class="flex flex-col text-center w-full md:mb-15">
+        <h1 class="sm:text-3xl uppercase text-2xl font-bold title-font mb-4 text-indigo-500 dark:text-indigo-400">Upload your book here :</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Here is the space to upload and publish book to scis-group.<br class="hidden lg:inline-block">
+            <br class="hidden lg:inline-block"> Make sure to fill all the details.
+        </p>
+      </div>
+      <form id="uploadForm" class="w-full flex flex-col gap-4" novalidate>
+        <div class="space-y-12">
+            <div class="border-b border-gray-900/10 pb-12">
+              <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white">Book details</h2>
+              <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-300">This information will be displayed publicly so be careful what you share.</p>
+
+              <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div class="sm:col-span-4">
+                  <label for="username" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Title</label>
+                  <div class="mt-2">
+                    <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline dark:bg-gray-500  outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                      <div class="shrink-0 text-base text-gray-500 select-none sm:text-sm/6 dark:text-gray-400 ">scisgroup.com/</div>
+                      <input type="text" id="title" name="title" class="dark:bg-gray-800 dark:text-white  block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" placeholder="janesmith">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-span-full">
+                  <label for="about" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Book's description</label>
+                  <div class="mt-2">
+                    <textarea id="description" name="description" rows="3" class="block w-full dark:bg-gray-800 dark:text-white outline rounded-md bg-white px-3 py-2 md:py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
+                  </div>
+                  <p class="mt-3 text-sm/6 text-gray-600 dark:text-gray-300">Write a few sentences about the book you want to upload.</p>
+                </div>
+
+                <div class="col-span-full">
+                  <label for="photo" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Cover Photo</label>
+                  <div class="mt-2 flex items-center gap-x-3">
+                    <svg class="size-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                    </svg>
+                    <div class="relative flex justify-center rounded-lg border border-dashed dark:border-gray-600 border-gray-900/25 px-6 py-2">
+                      <button type="button" class="rounded-md bg-indigo-500 text-white px-2.5 py-2 md:py-1.5 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-indigo-600 hover:text-white">Change</button>
+
+                      <input type="file" id="bookCover" name="bookCover" class="w-full opacity-0 border border-gray-300 text-sm absolute top-0 left-0 rounded px-0.5 py-1 md:py-1.5 text-gray-900   focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-span-full">
+                  <label for="" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Book space uploader</label>
+                  <div class="mt-2 flex justify-center rounded-lg border border-dashed dark:border-gray-600 border-gray-900/25 px-6 py-10">
+                    <div class="text-center">
+                      <svg class="mx-auto size-14 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
+                      </svg>
+                      <div class="mt-4 flex text-sm/6 text-gray-600">
+                        <label for="file-upload" class="relative dark:bg-gray-800 cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500">
+                          <span>Upload a file</span>
+                          <input id="file-upload" name="book" type="file" class="sr-only">
+                        </label>
+                        <p class="pl-1 dark:text-gray-400">or drag and drop</p>
+                      </div>
+                      <p class="text-xs/5 text-gray-600 dark:text-gray-400">PNG, JPG, GIF up to 10MB</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+
+            
+            <div class="border-b border-gray-900/10 pb-12">
+              <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white">Notifications</h2>
+              <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">We'll always let you know about important changes, but you pick what else you want to hear about.</p>
+
+            </div>
+        </div>
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+       
+            <button id="saveBookBtn" type="submit" class="bg-indigo-500 text-white px-7 w-[80px] py-1 h-8  rounded hover:bg-indigo-700 flex justify-center items-center relative">
+                  <span class="button-text">Save</span>
+                  <svg class="hidden absolute inset-0 m-auto h-5 w-5 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <div id="chatPopup" class="chat-with bg-no-repeat bg-center hidden fixed z-50 top-0 left-0 h-full rounded-lg dark:bg-gray-800 flex w-full
+      bg-[url('{{url_for('static', filename='images/Particulier-sm.png')}}')] md:bg-[url('{{ url_for('static', filename='images/Particulier-.png')}}')]">
+    <!-- Contact List Starts-->
+    <div id="contact" class="contact bg-white dark:bg-gray-900  relative md:flex md:max-w-md min-w-contact w-full transition-all duration-200 shadow-sm  overflow-hidden  h-full list-container  dark:bg-gray-800 flex flex-col gap-2 px-5 py-2">
+            <div class="title-app flex px-2 py-3 items-center justify-between">
+                <h1 class="text-2xl font-bold text-blue-500 dark:text-blue-400">SCIS Chat</h1>
+                <div class="flex items-center gap-5">
+                    <!-- <i class="fa-solid fa-circle-notch w-10 h-10 flex items-center justify-center dark:text-gray-400 bg-gray-200 rounded-lg hover:bg-blue-200 dark:bg-gray-700 dark:hover:bg-blue-600"></i>
+                    <i class="cursor-pointer  w-10 h-10 flex items-center justify-center bg-gray-200 rounded-lg hover:bg-blue-200 dark:bg-gray-700 dark:hover:bg-blue-600 show-search md:hidden fa-solid fa-magnifying-glass text-gray-500 dark:text-gray-400"></i>
+                    <i class="cursor-pointer w-10 h-10 flex items-center justify-center bg-gray-200 rounded-lg hover:bg-blue-200 dark:bg-gray-700 dark:hover:bg-blue-600 fa-solid fa-user-plus text-gray-500 dark:text-gray-400"></i> -->
+                    <div id="closeChat">
+                        <i  class="cursor-pointer toggle-user-profile text-xl flex items-center justify-center   fa-solid fa-times text-gray-500 dark:text-gray-400"></i>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="search flex items-center dark:bg-gray-900 bg-white  px-1 py-1.5
+             mb-2">
+                <input type="text" id="search" placeholder="Search Contacts ..." class="flex-1 border-2 border-gray-500 rounded-lg px-4 py-1 text-base/6 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-gray-300" />
+                <i class="fa-solid fa-magnifying-glass text-gray-500 ml-2 dark:text-gray-400"></i>
+            </div>
+        
+            <div class="contact-list gap-2 flex flex-col relative overflow-y-auto h-full " id="contact-list">
+                <!-- Contacts will be dynamically inserted here -->
+                 <svg class="contact-loader hidden absolute inset-0 m-auto h-5 w-5 text-blue-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+            </div>
+            <div class="flex w-full">
+              <button id="NewChat" type="submit" class="bg-blue-500 text-white dark:text-gray-300 px-3 py-1.5 w-full rounded hover:bg-blue-600 dark:bg-indgo-700 cursor-pointer dark:hover:bg-indigo-400">
+                  <span class="button-text"> <i class="fa-solid fa-user-plus mr-2"></i>New Chat</span>
+                  <svg class="hidden absolute inset-0 m-auto h-5 w-5 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                </button>
+            </div>
+    </div>
+    <!-- Contact List Ends -->
+
+    <!-- Chat zone starts -->
+    <div class="chat-room relative hidden md:flex flex flex-col  dark:bg-gray-800 w-full h-full overflow-hidden" id="chat">
+            
+            <!-- Chat Room header Starts -->
+            <div class="bg-white dark:bg-gray-800 p-2 flex justify-between items-center">
+                <div class=" p-1 flex items-center gap-2">
+                    <div class="flex items-center justify-center cursor-pointer backto-contact">
+                      <i class="cursor-pointer fa-solid fa-arrow-left text-gray-600 dark:text-gray-300 " id="back"></i>
+                    </div>
+                    <img id="selected_Employee_img" src="{{url_for('static', filename='icons/default_user.jpeg')}}" class="w-10 h-10 object-cover rounded-full border-0 dark:border-gray-600 show-incoming-info"  alt="">
+                    <div class="flex flex-col">
+                        <span id="selected-Employee-name" class="text-gray-600 text-sm dark:text-gray-300"></span>
+                        <span class="text-gray-600 text-sm dark:text-gray-300 typing-indicator" id="selected-contact-status"></span>
+                    </div>
+                </div>
+                <div class="header-icons flex items-center gap-4">
+                    <i class="start-voice-call-btn bg-gray-200      cursor-pointer  dark:bg-gray-700 hover:bg-blue-200 dark:bg-gray-700 dark:hover:bg-blue-600 dark:text-gray-200 fa-solid fa-phone"></i>
+                    <i class="cursor-pointer toggle-user-profile  dark:hover:bg-blue-600 fa-solid fa-ellipsis-vertical text-gray-500 dark:text-gray-400"></i>
+                </div>
+            </div>
+            <!-- Chat Room header Ends -->
+
+
+            <div class="conversation bg-gray-100 opacity-80 dark:bg-gray-900 w-full h-full overflow-x-hidden  overflow-y-auto p-4 space-y-4">
+               
+               <svg class="conversation-loader hidden absolute inset-0 m-auto h-5 w-5 text-blue-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                </svg>
+             
+            </div>
+            <!-- Conversation zone ends -->
+
+           
+            <div class="chat-footer relative bg-white dark:bg-gray-800 p-2  dark:border-gray-600 w-full flex items-center gap-2">
+              <div id="preview-container" class= "hidden absolute left-1/2 bottom-14 bg-white dark:bg-gray-800 flex flex-wrap justify-center md:w-1/2 xl:w-1/3  mx-auto p-0.5">
+                <!-- cancel selection -->
+                <div id="cancel-selection" class="absolute top-0 right-0 p-2 cursor-pointer">
+                  <i class="fa-solid fa-xmark text-gray-600 dark:text-gray-300"></i>
+                </div>
+              </div>
+              <form id="messageForm" class="flex items-center gap-3 w-full">
+                <!-- Attachment Icon -->
+                 
+
+                <div class="relative cursor-pointer">
+                  <button type="button" class="focus:outline-none">
+                    <i class="fa-solid fa-paperclip text-xl cursor-pointer text-gray-600 dark:text-gray-300"></i>
+                  </button>
+                  <input type="file" id="fileInput" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" multiple/>
+                </div>
+
+                <!-- Emoji Icon -->
+                <button type="button" class="focus:outline-none">
+                  <i class="fa-solid fa-smile text-xl cursor-pointer text-gray-600 dark:text-gray-300"></i>
+                </button>
+
+                <!-- Camera Icon -->
+                <button type="button" class="focus:outline-none">
+                  <i class="fa-solid fa-camera text-xl cursor-pointer text-gray-600 dark:text-gray-300"></i>
+                </button>
+
+                <!-- Hidden receiver_id input -->
+                <input type="hidden" id="receiver_id" />
+
+                <!-- Message Input & Recording Controls -->
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Text input (hidden while recording) -->
+                  <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Type a message..."
+                    class="flex-1 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+
+                  <!-- Recorder UI (hidden by default) -->
+                  <div
+                    id="recorder-ui"
+                    class="hidden flex-1 items-center gap-2 bg-gray-100 dark:bg-gray-700 px-4 py-1 rounded-full border border-gray-300 dark:border-gray-600 shadow-inner"
+                  >
+                    <div id="mic" class="flex-1 h-8 rounded bg-gray-50 dark:bg-gray-800 border border-gray-300 p-1.5 shadow-sm"></div>
+                    <span id="progress" class="text-base hidden font-mono text-gray-600 dark:text-gray-300">00:00</span>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex send-message-btn gap-1">
+                  <!-- Send text message -->
+                  <button id="sendMessageBtn"
+                    type="submit"
+                    class="submit-message-btn hidden h-8 w-8 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-full focus:outline-none"
+                  >
+                    <i class="fa-brands fa-telegram text-xl"></i>
+                  </button>
+
+                  <!-- Send audio -->
+                  <button
+                    type="button"
+                    id="send-btn"
+                    class="hidden h-8 w-8 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-full"
+                  >
+                    <i class="ri-send-plane-2-line text-lg"></i>
+                  </button>
+
+                  <!-- Cancel audio -->
+                  <button
+                    type="button"
+                    id="cancel-btn"
+                    class="hidden h-8 w-8 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded-full"
+                  >
+                    <i class="ri-close-line text-lg"></i>
+                  </button>
+
+                  <!-- Mic button (start recording) -->
+                  <button
+                    type="button"
+                    id="mic-btn"
+                    class="recordBtn record-audio-btn h-8 w-8 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full"
+                  >
+                    <i class="ri-mic-line text-xl"></i>
+                  </button>
+                </div>
+              </form>
+
+            </div>
+            <!-- Chat Footer Ends -->
+
+    </div>
+    <!-- Chat zone Ends -->
+  
+     <!-- video call zone starts -->
+     <div  class="voice-call-interface absolute  inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center hidden z-50">
+            <div class="voice-resize draggable bg-white dark:bg-gray-800 rounded-lg shadow-md md:h-3/5  md:w-3/6 flex flex-col justify-center items-center">
+                <img src="{{url_for('static', filename='icons/default_user.jpeg') }}" alt=""  class="w-32 h-32 rounded-full mb-4 receptor">
+                <h1 class="text-lg font-semibold text-center mt-4 text-white">John Doe & Jane Smith</h1>
+                <p class="text-gray-500 text-center">In Call...</p>
+                <div class="text-center mt-2">
+                    <span class="text-gray-800 text-lg text-white">00:01:30</span>
+                </div>
+                <div class="flex gap-20 justify-around mt-4 mb-4">
+                    <button  class="end-call bg-red-500 text-white rounded-full w-12 h-12 hover:bg-red-600">
+                        <i class="fas fa-phone-alt"></i>
+                    </button>
+                    <button class="bg-gray-300 text-gray-700 rounded-full w-12 h-12 hover:bg-gray-400 mute-call" >
+                        <i class="fas fa-microphone-slash"></i>
+                    </button>
+                </div>
+            </div>
+    </div>
+     <!-- video call zone ends -->
+    <!-- Loader starts -->
+   
+        <!-- Loader ends -->  
+         
+  </div>
+
+  <div class="absolute top-0 left-0 flex flex-col justify-center items-center w-full h-full Z-50  bg-opacity-80" id="loading">
+    <i class="fa-solid fa-spinner animate-spin text-4xl text-gray-800"></i>
+    <p class="text-gray-800">Loading...</p>
+  </div>
+    
+
+  <!-- Login Popup -->
+  <div id="loginPopup" class="md:bg-[url('{{url_for('static', filename='images/Particulier-.png')}}')] bg-white dark:bg-gray-800 w-full fixed inset-0 flex items-center justify-center hidden z-50 transition-transform duration-300" aria-hidden="true">
+    <div class="bg-white border dark:bg-gray-700 rounded-lg shadow-lg p-6 w-full md:max-w-sm transform scale-0 opacity-0 transition-all duration-300" role="dialog" aria-modal="true">
+             <img src="{{url_for('static', filename='images/logo_scis_.png')}}" alt="" class="mx-auto mb-4 w-10 h-10 dark:bg-gray-800">
+            <h2 class="text-xl font-semibold mb-4 text-center text-blue-500 dark:text-blue-500">Connexion</h2>
+            <form id="loginForm" class="w-full flex flex-col gap-4" novalidate>
+
+              <div class="sm:col-span-3">
+                <label for="userName" class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300">Username *</label>
+                <div class="mt-2">
+                  <input type="text" placeholder="Enter your username" id="userName" name="userName" autocomplete="given-name" class="dark:text-white dark:bg-gray-800 block border w-full rounded-md bg-white px-3 py-2 md:py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" required />
+                </div>
+              </div>
+              <div class="sm:col-span-3">
+                <label for="loginPassword" class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300">Password *</label>
+                <div class="mt-2">
+                  <input type="password" name="loginPassword" id="loginPassword"  placeholder="Enter your password" autocomplete="given-name" class="dark:text-white dark:bg-gray-800 block border w-full rounded-md bg-white px-3 py-2 md:py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                  <label for="remember-me" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">Remember me</label>
+                </div>
+                <div class="text-sm">
+                  <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
+                </div>
+              </div>
+              
+              <div class="flex justify-between flex-col space-x-2 mt-4">
+                <!-- <button type="button" id="closeLogin" class="bg-gray-300 px-4 py-1 rounded hover:bg-gray-400">Close</button> -->
+                <button id="loginBtn" type="submit" class="bg-indigo-500 text-white px-8 py-1.5 h-10 w-full rounded hover:bg-indigo-700 flex justify-center items-center relative">
+                  <span class="button-text">Login</span>
+                  <svg class="hidden absolute inset-0 m-auto h-5 w-5 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                </button>
+                <span class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-4">Don't have an account? <a href="#" class="registerBtn text-blue-600 hover:text-blue-500">Sign up</a></span>
+              </div>
+            </form>
+            <div class="designer text-center mt-4"><data value=designer>Designed by <a href="https://github.com/Maximus-steve-prog" class="text-blue-600 hover:text-blue-500">Maximus Dev Code</a></data></div>
+    </div>
+  </div>
+        
+  <!-- Register Popup -->
+  <div id="registerPopup" class="md:bg-[url('{{url_for('static', filename='images/Particulier-.png')}}')] bg-white dark:bg-gray-800 fixed inset-0 flex items-center justify-center hidden z-50 transition-transform duration-300" aria-hidden="false">
+    <div class=" rounded-lg border   py-6 w-full md:max-w-sm transform scale-0 shadow-lg opacity-0 transition-all duration-300 overflow-y-auto relative">
+      <img src="{{url_for('static', filename='images/logo_scis_.png')}}" alt="" class="mx-auto mb-4 w-10 h-10 dark:bg-gray-800">
+      <h2 class="text-xl text-center font-semibold mb-4 text-indigo-500 dark:text-indigo-500">Register Employee</h2>
+      <form id="registerForm" class="px-4 w-full relative   overflow-y-auto flex flex-col gap-2" novalidate>
+        <div class="sm:col-span-3">
+                <!-- <label for="fullName" class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300">Full name *</label> -->
+                <div class="mt-2">
+                  <input type="text" name="fullName" id="fullName" placeholder="Enter your full name" autocomplete="given-name" class="dark:text-white dark:bg-gray-800 block border w-full rounded-md bg-white px-3 py-2 md:py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                </div>
+        </div>
+        <div class="sm:col-span-3">
+                <!-- <label for="country" class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300">Employee Type *</label> -->
+                <div class="mt-2 grid grid-cols-1">
+                  <select id="typeEmployee" name="typeEmployee" autocomplete="country-name" class="dark:text-white dark:bg-gray-800 col-start-1 border row-start-1 w-full appearance-none rounded-md bg-white py-2 md:py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <option value="">Select type of Employee</option>
+                    <option>UI Designer</option>
+                    <option>Fullstack Developer</option>
+                    <option>Backend Developer</option>
+                    <option>Frontend Developer</option>
+                    <option>Founder</option>
+                    <option>DevOps</option>
+                    <option>Product Manager</option>
+                    <option>Frontend Developer</option>
+                  </select>
+                  <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+        </div>
+      
+        <div class="sm:col-span-3">
+          <!-- <label for="registerPassword" class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300">Password *</label> -->
+          <div class="mt-2">
+            <input type="password" name="registerPassword" id="registerPassword"  placeholder="Enter your password" autocomplete="given-name" class="dark:text-white dark:bg-gray-800 block border w-full rounded-md bg-white px-3 py-2 md:py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+          </div>
+        </div>
+        <div class="sm:col-span-3">
+          <!-- <label for="confirmPassword" class="dark:text-gray-300 block text-sm/6 font-medium text-gray-900">Confirm Password *</label> -->
+          <div class="mt-2">
+            <input type="password" name="confirmPassword" id="confirmPassword"  placeholder="Confirm your password" autocomplete="given-name" class="dark:text-white dark:bg-gray-800 block border w-full rounded-md bg-white px-3 py-2 md:py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+          </div>
+        </div>
+        <div class="col-span-full">
+            <!-- <label for="about" class="block text-sm/6 font-medium text-gray-900 dark:text-white">self description</label> -->
+            <div class="mt-2">
+              <textarea name="about" placeholder="Write a few sentences about yourself" id="about" rows="2" class="block w-full dark:bg-gray-800 dark:text-white outline rounded-md bg-white px-3 py-2 md:py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
+            </div>
+            <!-- <p class="mt-3 text-sm/6 text-gray-600 dark:text-gray-300">Write a few sentences about the book you want to upload.</p> -->
+        </div>
+        
+      
+        <div class="col-span-full preview text-end w-full flex items-center justify-end gap-2 ">
+                  
+                  <img src="{{url_for('static', filename='icons/default_user.jpeg') }}" alt="" id="profilePhotoPreview" class=" w-20 h-20 border hidden border-dashed dark:border-gray-400 border-gray-900/25  object-cover rounded-full">
+                  
+                  <div class="uploader-zone mt-2 flex justify-center text-end  w-full  rounded-lg border border-dashed dark:border-gray-400 border-gray-900/25 p-1">
+                    <div class="text-center">
+                      <svg class="mx-auto size-10 text-gray-300" viewBox="0 0 30 30" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
+                      </svg>
+                      <div class="mt-1 flex text-sm/6 text-gray-600">
+                        <label for="profilePhoto" class="relative cursor-pointer rounded-md bg-white dark:bg-gray-700 font-medium font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500">
+                          <span class="">Upload a file</span>
+                          <input type="file" id="profilePhoto" name="profilePhoto" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer dark:text-white dark:bg-gray-800 w-full" accept="image/*" required />
+                        </label>
+                        <p class="pl-1 dark:text-gray-100">or drag and drop</p>
+                      </div>
+                      <p class="text-xs/5 text-gray-600 dark:text-gray-100">PNG, JPG, GIF up to 10MB</p>
+                    </div>
+                  </div>
+        </div>
+        <div class="flex flex-col justify-between space-x-2 mt-4">
+               <button id="registerBtn" type="submit" class="bg-indigo-500 text-white px-8 py-1.5 h-10 w-full rounded hover:bg-indigo-700 flex justify-center items-center relative">
+                  <span class="button-text">Register</span>
+                  <svg class="hidden absolute inset-0 m-auto h-5 w-5 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                </button>
+            <span class="text-sm mt-4 font-medium text-gray-500 dark:text-gray-400">Already have an account? <a href="" class="loginBtn text-blue-600 hover:text-blue-500">Sign in</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="chat bg-white dark:bg-gray-800 fixed bottom-20 -right-96 rounded-lg  transform transition-transform duration-300 ease-in-out z-40">
+    <div class="chat-header flex items-center justify-between px-4 py-2">
+        <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Chat</h3>
+        <button id="closeChat" class="text-gray-600 dark:text-gray-200 hover:text-gray-800 dark:hover:text-gray-100"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="chat-messages overflow-y-auto px-4 py-2">
+        <div class="message text-gray-700 dark:text-gray-200">
+            <span class="font-semibold">User:</span> Hello, how can I help you?
+        </div>
+    </div>
+    <div class="chat-input flex items-center px-4 py-2 mb-2">
+        <input type="text" placeholder="Type your message" class="dark:bg-gray-800 dark:text-white w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-1 mr-2">
+        <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Send</button>
+    </div>
+  </div>
+        
+
+  <div id="circleProgress" title="Scroll to Top" class="cursor-pointer shadow-xl z-50 transform transition-transform duration-300 ease-in-out w-10 h-10 flex items-center justify-center fixed bottom-4 right-4 bg-blue-500 text-white rounded-full cursor-pointer">
+    <div class="bg-white opacity-90 dark:bg-gray-800 relative w-8 h-8 flex items-center justify-center rounded-full cursor-pointer">
+       <i class="fas fa-chevron-up text-indigo-500 dark:text-white"></i> 
+    </div>
+  </div>
+
+  <div class="openChat fixed bottom-20 right-4 rounded-full transform transition-transform duration-300 ease-in-out z-50 cursor-pointer bg-indigo-500 text-white w-10 h-10 flex items-center justify-center rounded-full cursor-pointer ">
+    <i class="fas fa-comments"></i>
+    <div id="notificationCount" class="absolute -top-1 -right-1 bg-red-400 text-white  flex items-center justify-center rounded-full"></div>
+
+  </div>
+
+  <footer class="bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-200 body-font">
+    <div class="container mx-auto py-4 px-5 flex flex-col sm:flex-row items-center justify-between">
+      <p class="text-sm">&copy; 2024 SCIS-GROUP Company. All rights reserved. <a href="https://www.youtube.com"><span class="text-blue-500 font-medium">Design by Maximus Dev Code</span></a></p>
+      <button id="darkModeToggle" class="darkModeToggle mt-2 sm:mt-0 flex items-center bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-200 px-3 py-3 rounded-full focus:outline-none hover:bg-gray-400 dark:hover:bg-gray-600">
+          <i id="themeIcon" class="fas fa-moon p-1"></i>
+  
+      </button>
+    </div>
+  </footer>
+    
+  <script src="{{url_for('static', filename='lib/jquery-3.7.1.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/i18next.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/swiper-bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/jquery.validate.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/axios.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/jquery-ui.js')}}" ></script>
+  <script src="{{url_for('static', filename='lib/socket.io.min.js')}}" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/wavesurfer.js@7/dist/plugins/record.min.js"></script>
+   <script src="{{url_for('static', filename='js/main.js')}}"></script>
+  <script src="{{url_for('static', filename='js/chatRoom.js')}}"></script>
+</body>
+</html>
